@@ -1,9 +1,5 @@
 package exercise;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 // BEGIN
 public class App {
     public static boolean scrabble(String tiles, String word) {
