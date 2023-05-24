@@ -1,6 +1,5 @@
 package exercise;
 
-import java.util.stream.Collectors;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +16,7 @@ public class App {
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.toList());
 
-        if(list.containsAll(charList)) {
-            return true;
-        } else {
-            return false;
-        }
+        return list.contains(charList);
     }
 }
 //END
