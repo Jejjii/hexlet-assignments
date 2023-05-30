@@ -8,6 +8,7 @@ class App {
     public static Map<String, Integer> getWordCount(String sentence) {
         Map <String, Integer> wordCounts = new HashMap<>();
         String[] words = sentence.split(" ");
+        if(sentence.length() == 0) wordCounts.clear();
         for (String word : words) {
             if(wordCounts.containsKey(word)) {
                 wordCounts.put(word, wordCounts.get(word) + 1); // 2 параметр это значение ключа, он вернет сначала 1
