@@ -3,31 +3,32 @@ package exercise;
 import java.util.HashMap;
 import java.util.Map;
 
-class App {
-
+public class App {
     public static Map<String, Integer> getWordCount(String sentence) {
-        Map <String, Integer> wordCounts = new HashMap<>();
+        Map<String, Integer> wordCount = new HashMap<>();
         String[] words = sentence.split(" ");
-        if(sentence.length() == 0) wordCounts.clear();
         for (String word : words) {
-            if(wordCounts.containsKey(word)) {
-                wordCounts.put(word, wordCounts.get(word) + 1); // 2 параметр это значение ключа, он вернет сначала 1
-                // и добавит еще +1, в значение
-            } else {
-                wordCounts.put(word, 1); //если слова нет, то значению ключа(word) присвоит 1
-            }
+            wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
         }
-        return wordCounts;
+        if( sentence.length() == 0) wordCount.clear();
+
+        return wordCount;
     }
 
-    public static String toString (Map<String,Integer> wordCounts) {
-        StringBuilder strB = new StringBuilder("{");
-        for(Map.Entry<String, Integer> entry :wordCounts.entrySet()) {
-            strB.append(entry.getKey()).append(": ").append(entry.getValue());
-            System.out.println();
+    public static String toString(Map<String, Integer> wordCount) {
+        StringBuilder result = new StringBuilder();
+        if (wordCount.size() == 0) return "{}";
+        result.append("{\n");
+
+        for (Map.Entry<String, Integer> entry : wordCount.entrySet()) {
+            String word = entry.getKey();
+            int count = entry.getValue();
+            result.append("  ").append(word).append(": ").append(count).append("\n");
         }
-        strB.append("}");
-        return strB.toString();
+
+        result.append("}");
+
+        return result.toString();
     }
 }
 
