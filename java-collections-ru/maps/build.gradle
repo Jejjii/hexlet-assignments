@@ -1,6 +1,8 @@
 plugins {
   id 'java'
   id 'com.adarshr.test-logger' version '2.1.1'
+  id 'checkstyle'
+  id 'application'
 }
 
 repositories {
@@ -25,3 +27,22 @@ testlogger {
 tasks.withType(JavaCompile) {
   options.encoding = "UTF-8"
 }
+
+application {
+  mainClass = 'exercise.App'
+}
+
+checkstyle {
+  toolVersion '8.41'
+}
+
+task checkExercises (type: Checkstyle) {
+  file('.').eachDir { course ->
+    def exercise = project.hasProperty('exercise') ? project.exercise : ''
+    source course.name + '/' + exercise
+    include '**/*.java'
+    exclude '**/build/**'
+    classpath = files()
+  }
+}
+
