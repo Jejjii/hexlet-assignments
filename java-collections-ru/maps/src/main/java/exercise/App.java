@@ -22,9 +22,9 @@ class App {
     public static String toString (Map<String,Integer> wordCounts) {
         StringBuilder strB = new StringBuilder("{");
         for(Map.Entry<String, Integer> entry :wordCounts.entrySet()) {
-            strB.append(entry.getKey()).append(" ").append(entry.getValue()).append(", ");
+            strB.append(entry.getKey()).append(": ").append(entry.getValue());
+            System.out.println();
         }
-        strB.delete(strB.length() - 2, strB.length());
         strB.append("}");
         return strB.toString();
     }
