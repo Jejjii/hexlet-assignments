@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.adarshr.test-logger' version '2.1.1'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = "exercise.App"
+}
+
+checkstyle {
+    toolVersion '8.41'
+}
+
+task checkExercises (type: Checkstyle) {
+    file('.').eachDir { course ->
+        def exercise = project.hasProperty('exercise') ? project.exercise : ''
+        source course.name + '/' + exercise
+        include '**/*.java'
+        exclude '**/build/**'
+        classpath = files()
+    }
+}
