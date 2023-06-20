@@ -22,7 +22,7 @@ public class App {
                                 return "changed";
                             }
                         },
-                        (oldValue, newValue) -> newValue,
+                        null,
                         LinkedHashMap::new
                 ));
     }
