@@ -2,7 +2,7 @@ package exercise;
 
 public interface Home {
 
-    double getArea(double area, double balconyArea);
+    double getArea();
 
     int compareTo(Home anotherObj);
     String nameOfObj();
