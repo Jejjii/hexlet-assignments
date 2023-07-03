@@ -1,5 +1,9 @@
 package exercise;
 
-// BEGIN
+public interface Home {
 
-// END
+    double getArea();
+
+    int compareTo(Home anotherObj);
+    String nameOfObj();
+}
