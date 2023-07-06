@@ -1,32 +1,32 @@
 package exercise;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import exercise.InMemoryKV;
 public class App {
 
-    public static void swapKeyValue(KeyValueStorage map) {
-        KeyValueStorage swappedMap = new InMemoryKV(new HashMap<>());
+    public static void swapKeyValue(KeyValueStorage storage) {
+        Map<String, String> originalMap = storage.toMap()   ;
+        Map<String, String> swappedMap = new HashMap<>();
 
-        // Заполняем swappedMap, меняя местами ключи и значения из исходного map
-        for (Map.Entry<String, String> entry : map.toMap().entrySet()) {
+        for (Map.Entry<String, String> entry : originalMap.entrySet()) {
             String key = entry.getValue();
             String value = entry.getKey();
-            swappedMap.set(key, value);
+            swappedMap.put(key, value);
         }
 
-        // Очищаем исходный map
-        for (String key : map.toMap().keySet()) {
-            map.unset(key);
+        for (String key : originalMap.keySet()) {
+            storage.unset(key);
         }
 
-        // Заполняем исходный map значениями из swappedMap
-        for (Map.Entry<String, String> entry : swappedMap.toMap().entrySet()) {
+        for (Map.Entry<String, String> entry : swappedMap.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            map.set(key, value);
+            storage.set(key, value);
         }
     }
+
 }

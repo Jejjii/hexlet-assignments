@@ -4,15 +4,15 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class InMemoryKV implements KeyValueStorage {
-    private Map<String,String > map;
+    private Map<String,String > map = new HashMap<>();
 
-    public InMemoryKV(Map<String,String> map) {
-        this.map = map;
+    public InMemoryKV(Map<String,String> data) {
+        map.putAll(data);
     }
 
     @Override
     public void set(String key, String value) {
-        map.put(key,value);
+        map.put(key, value);
     }
 
     @Override
@@ -26,8 +26,8 @@ public class InMemoryKV implements KeyValueStorage {
     }
 
     @Override
-    public Map<String, String> toMap() {
-     return map;
+    public Map<String,String> toMap() {
+     return new HashMap<>(map);
     }
 
 }
