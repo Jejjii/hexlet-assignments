@@ -14,6 +14,7 @@ public final class App {
                    ctx.result("Welcome to Hexlet!");
                 });
         // END
+
         return app;
     }
 
