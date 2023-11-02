@@ -69,7 +69,7 @@ public class Application {
             newPost.setTitle(post.getTitle());
             return new ResponseEntity<>(newPost, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(post, HttpStatus.NO_CONTENT);
     }
 
     // END
