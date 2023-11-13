@@ -93,8 +93,7 @@ public class TaskControllerTest {
         taskRepository.save(task);
 
         var data = new HashMap<>();
-        data.put("title",task.getTitle());
-        data.put("description",task.getDescription());
+        data.put("title"," new title");
 
         var request = put("/tasks/" + task.getId())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -103,9 +102,9 @@ public class TaskControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isOk());
 
-        task = taskRepository.findByTitle(task.getTitle()).get();
-        assertThat(task.getTitle().equals(data.get("title")));
-        assertThat(task.getDescription().equals(data.get("description")));
+        task = taskRepository.findById(task.getId()).get();
+        assertThat(task.getTitle()).isEqualTo(data.get("title"));
+
     }
 
     @Test
