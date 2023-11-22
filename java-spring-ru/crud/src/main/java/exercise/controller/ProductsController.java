@@ -40,7 +40,7 @@ public class ProductsController {
     // BEGIN
     @GetMapping(path = "")
     @ResponseStatus(HttpStatus.OK)
-    public List<ProductDTO> index() {
+    public List<ProductDTO> showall() {
         var products = productRepository.findAll();
 
         return products.stream()
@@ -87,5 +87,9 @@ public class ProductsController {
     void destroy(@PathVariable Long id) {
         productRepository.deleteById(id);
     }
+
+
+
+
     // END
 }
