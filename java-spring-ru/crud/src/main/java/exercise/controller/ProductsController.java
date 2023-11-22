@@ -44,11 +44,11 @@ public class ProductsController {
         var products = productRepository.findAll();
 
         return products.stream()
-                .map(product -> productMapper.map(product))
+                .map(productMapper::map)
                 .toList();
     }
 
-    @GetMapping(path = "{id}")
+    @GetMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProductDTO show(@PathVariable Long id) {
         var product = productRepository.findById(id)
@@ -61,11 +61,8 @@ public class ProductsController {
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED) // Устанавливаем статус CREATED для успешного ответа
     public ProductDTO createProduct(@RequestBody ProductCreateDTO productCreateDTO) {
-        // Проверяем, существует ли категория
-        if (!categoryRepository.existsById(productCreateDTO.getCategoryId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category not found");
-        }
 
+        // Проверяем, существует ли категория
         // Преобразование DTO в сущность и сохранение
         Product product = productMapper.map(productCreateDTO);
         productRepository.save(product);
@@ -74,7 +71,7 @@ public class ProductsController {
         return productMapper.map(product);
     }
 
-    @PutMapping(path = "")
+    @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProductDTO update(@RequestBody @Valid ProductUpdateDTO productData,@PathVariable Long id) {
         var product = productRepository.findById(id)
